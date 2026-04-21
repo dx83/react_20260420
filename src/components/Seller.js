@@ -1,0 +1,68 @@
+import { Button, Input, Pagination, Table } from 'antd';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const Seller = () => {
+
+    const columns = [
+        { title: '번호', dataIndex: '_id', key: 'code' },
+        { title: '물품명', dataIndex: 'name', key: 'name' },
+        { title: '가격', dataIndex: 'price', key: 'price' },
+        { title: '수량', dataIndex: 'quantity', key: 'quantity' },
+        { title: '작성일', dataIndex: 'regdate1', key: 'regdate' },
+        {
+            title: '이미지', dataIndex: 'img', key: 'img',
+            render: (text, record) => (
+                <img src={text} alt={record.name} style={{ width: 50, height: 50 }} />
+            )
+        },
+    ]
+
+    const cnt = 10;
+    const [text, setText] = useState('');
+    const [page, setPage] = useState(1);
+    const [rows, setRows] = useState([]);
+    const [total, setTotal] = useState(0);
+
+    const handleData = async () => {
+        const url = `/api/item/selectlist.json?page=${page}&cnt=${cnt}&text=${text}`;
+        const { data } = await axios.get(url);
+        console.log(data);
+        if (data.status === 200) {
+            setRows(data.result);
+            setTotal(data.total);
+        }
+    }
+
+    useEffect(() => {
+        handleData();
+    }, [page, text]);
+
+    const onChange = (page) => {
+        setPage(page);
+    }
+
+    return (
+        <div>
+            <h3>판매자</h3>
+
+            <Link to={`/seller/write`}><Button>물품등록</Button></Link>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Input placeholder='검색어를 입력하세요'
+                    style={{ width: 300 }}
+                    value={text} onChange={(e) => setText(e.target.value)} />
+            </div>
+            <br />
+
+            <Table rowKey={"_id"} columns={columns} dataSource={rows}
+                size='small' pagination={false} />
+            <Pagination align='center' defaultCurrent={page} total={total}
+                showSizeChanger={false} onChange={onChange} size='small' />
+
+        </div>
+    );
+};
+
+export default Seller;

@@ -1,7 +1,7 @@
 import { Button, Input, Pagination, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 const Board = () => {
     //컬럼의 명칭, dataindex는 백엔드에서 오는 키값, key는 고유한 키값
@@ -13,7 +13,10 @@ const Board = () => {
         { title: '작성일', dataIndex: 'regdate2', key: 'regdate' },
     ]
 
-    const [page, setPage] = useState(1);
+    const navigate = useNavigate();
+    const [searchParam] = useSearchParams();
+    const [page, setPage] = useState(searchParam.get('page') || 1);
+
     const [text, setText] = useState('');
     const [cnt, setCnt] = useState(10);
     const [rows, setRows] = useState([]);
@@ -43,6 +46,16 @@ const Board = () => {
         setPage(page);
     }
 
+    // 조휘수 증가
+    const handleHit = async (no) => {
+        const url = `/api/board/updatehit.json?no=${no}`;
+        const { data } = await axios.put(url);
+        console.log(data);
+        if(data.status === 200) {
+            navigate(`/board/view?no=${no}&page=${page}`);
+        }
+    }
+
     useEffect(() => {
         handleData();
     }, [page, text]);
@@ -60,8 +73,16 @@ const Board = () => {
             </div>
             <br />
 
-            <Table columns={columns} dataSource={processedRows} pagination={false} />
-
+            <Table columns={columns} dataSource={processedRows}
+                pagination={false} size='small'
+                style={{ cursor: 'pointer'}}
+                onRow={(record) => {
+                    return {
+                        onClick: () => {
+                            handleHit(record._id);
+                        }
+                    }
+                }} />
             <Pagination align='center' defaultCurrent={page} total={total}
                 showSizeChanger={false} onChange={onChange} />
         </div>
