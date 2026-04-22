@@ -16,6 +16,11 @@ const items = [
         icon: <SettingOutlined />,
     },
     {
+        label: '회원가입',
+        key: '/register',
+        icon: <MailOutlined />,
+    },
+    {
         label: '게시판',
         key: '/board',
         icon: <MailOutlined />,

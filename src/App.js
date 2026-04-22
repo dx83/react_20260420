@@ -9,7 +9,10 @@ import BoardWrite from './components/BoardWrite';
 import BoardView from './components/BoardView';
 import BoardUpdate from './components/BoardUpdate';
 import Seller from './components/Seller';
-import SellerWrite from './components/SellerWrite';
+import ItemInsert from './components/ItemInsert';
+import ItemView from './components/ItemView';
+import Register from './components/Register';
+import ItemUpdate from './components/ItemUpdate';
 
 const App = () => {
   return (
@@ -26,7 +29,10 @@ const App = () => {
         <Route path="/board/view" element={<BoardView />} />
         <Route path="/board/update" element={<BoardUpdate />} />
         <Route path="/seller" element={<Seller />} />
-        <Route path="/seller/write" element={<SellerWrite />} />
+        <Route path="/seller/iteminsert" element={<ItemInsert />} />
+        <Route path="/seller/view" element={<ItemView />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/seller/itemupdate" element={<ItemUpdate />} />
 
       </Routes>
     </div>

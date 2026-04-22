@@ -1,9 +1,11 @@
 import { Button, Input, Pagination, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Seller = () => {
+
+    const navigate = useNavigate();
 
     const columns = [
         { title: '번호', dataIndex: '_id', key: 'code' },
@@ -47,7 +49,7 @@ const Seller = () => {
         <div>
             <h3>판매자</h3>
 
-            <Link to={`/seller/write`}><Button>물품등록</Button></Link>
+            <Link to={`/seller/iteminsert`}><Button>물품등록</Button></Link>
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Input placeholder='검색어를 입력하세요'
@@ -57,7 +59,12 @@ const Seller = () => {
             <br />
 
             <Table rowKey={"_id"} columns={columns} dataSource={rows}
-                size='small' pagination={false} />
+                size='small' pagination={false}
+                onRow={(record) => ({
+                    onClick: () => {
+                        navigate(`/seller/view?code=${record._id}`)
+                    }
+                })} />
             <Pagination align='center' defaultCurrent={page} total={total}
                 showSizeChanger={false} onChange={onChange} size='small' />
 
