@@ -37,6 +37,11 @@ const Menu = () => {
                 key: '/register',
                 icon: <MailOutlined />,
             },
+            {
+                label: '실시간채팅',
+                key: '/chat',
+                icon: <MailOutlined />,
+            },
         ];
     }
     else {  // 로그인 상태

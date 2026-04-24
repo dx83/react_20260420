@@ -15,7 +15,7 @@ const MemberDelete = () => {
         const { data } = await api.delete(url, { data: body });
         console.log(data);
         if (data.status === 200) {
-            if (window.confirm('정말 탈퇴할까요?')) {
+            if (window.confirm('회원 탈퇴하시겠습니까?')) {
                 dispatch({ type: "LOGOUT" });
                 alert('회원 탈퇴가 완료되었습니다.');
                 navigate('/home', { replace: true });
@@ -25,7 +25,7 @@ const MemberDelete = () => {
             }
         }
         else {
-            alert('비밀번호가 일치하지 않습니다!');
+            alert('비밀번호가 틀립니다!');
         }
     }
 
@@ -39,15 +39,15 @@ const MemberDelete = () => {
                 style={{ maxWidth: 600 }}
             >
                 <Form.Item
-                    label="비밀번호"
-                    name="password"
+                    label='비밀번호'
+                    name='password'
                     rules={[{ required: true, message: '비밀번호를 입력하세요!' }]}
                 >
                     <Input.Password />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type='primary' htmlType='submit'>
                         회원 탈퇴
                     </Button>
                 </Form.Item>
