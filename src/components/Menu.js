@@ -23,6 +23,11 @@ const Menu = () => {
                 icon: <MailOutlined />,
             },
             {
+                label: '게시판2',
+                key: '/boardlist',
+                icon: <MailOutlined />,
+            },
+            {
                 label: '판매자',
                 key: '/seller',
                 icon: <MailOutlined />,
@@ -54,6 +59,11 @@ const Menu = () => {
             {
                 label: '게시판',
                 key: '/board',
+                icon: <MailOutlined />,
+            },
+            {
+                label: '게시판2',
+                key: '/boardlist',
                 icon: <MailOutlined />,
             },
             {

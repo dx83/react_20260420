@@ -23,7 +23,8 @@ const Board = () => {
     const [total, setTotal] = useState(0);
 
     const handleData = async () => {
-        const url = `/api/board/select.json?page=${page}&text=${text}&cnt=${cnt}`;
+        //const url = `/api/board/select.json?page=${page}&text=${text}&cnt=${cnt}`;
+        const url = `/api/board/selectlist.json?page=${page}&text=${text}&size=${cnt}`;
         const { data } = await axios.get(url);
         console.log(data);
         if (data.status === 200) {

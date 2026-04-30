@@ -21,6 +21,7 @@ import MemberUpdate from './components/mypage/MemberUpdate';
 import MemberPassword from './components/mypage/MemberPassword';
 import MemberDelete from './components/mypage/MemberDelete';
 import Chat from './components/Chat';
+import BoardList from './components/BoardList';
 
 const App = () => {
 
@@ -45,6 +46,9 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/board" element={<Board />} />
+
+        <Route path="/boardlist" element={<BoardList />} />
+
         <Route path="/board/write" element={<BoardWrite />} />
         <Route path="/board/view" element={<BoardView />} />
         <Route path="/board/update" element={<BoardUpdate />} />
